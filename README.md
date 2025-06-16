@@ -20,3 +20,69 @@
     * [关键语义 & 修饰符](./01-C语言基础与进阶/Readme.md/#-关键语义&修饰符)
     * [内存存储类型与生命周期](./01-C语言基础与进阶/Readme.md/#-内存存储类型与生命周期)
     * [编译与调试基础](01-C语言基础与进阶/Readme.md/#-编译与调试基础)
+* 嵌入式系统基础知识
+  * 嵌入式系统概览
+    * 定义与特点
+    * 系统构成
+    * 主流 MCU 简介
+  * 架构与启动流程
+    * Cortex-M 内核结构
+    * 启动文件 Startup.s
+    * 启动流程简要
+  * 编译器与链接器
+    * 常用嵌入式工具链
+    * 链接脚本 (.ld) 示例
+    * 存储器布局图（STM32 示例）
+* 驱动开发与外设编程
+  * 寄存器级开发
+    * 地址映射与寄存器偏移
+    * 位操作技巧
+  * 通用外设驱动
+    * GPIO
+    * UART / USART
+    * SPI / I2C
+    * ADC / DAC
+    * 定时器 / PWM
+    * RTC 实时时钟
+  * 复杂外设支持
+    * DMA 控制器
+    * 看门狗
+    * CAN / USB / SDIO / Ethernet
+    * LCD / 触摸屏驱动
+  * 开发库 & 工具链
+    * STM32 HAL / LL
+    * STM32CubeMX
+    * CMSIS 标准接口
+* RTOS
+  * RTOS 基础概念
+  * 任务管理
+  * 时间管理
+  * 线程间通信
+  * 资源管理
+  * FreeRTOS 配置与移植
+  * 实践应用场景
+* 嵌入式 Linux 开发基础
+  * 系统概览
+    * 特点
+    * 组成
+  * 启动流程详解
+  * 设备树
+  * Linux 驱动开发模型
+  * 根文件系统构建
+  * 工具链与调试手段
+  * 常见开发平台
+* 网络通信与物联网协议
+  * [串口通信与 Socket 通信](./06-NetworkIot/06_Network_IoT.md/-串口通信与Socket通信)
+    * [串口通信](./06-NetworkIot/06_Network_IoT.md/-串口通信（UART/USART）)
+    * [Socket 网络通信](./06-NetworkIot/06_Network_IoT.md/-Socket 网络通信)
+  * [无线通信协议](./06-NetworkIot/06_Network_IoT.md/-无线通信协议)
+    * [Wi-Fi](./06-NetworkIot/06_Network_IoT.md/-Wi-Fi)
+    * [BLE（蓝牙低功耗）](./06-NetworkIot/06_Network_IoT.md/-BLE（蓝牙低功耗）)
+    * [LoRa / ZigBee](./06-NetworkIot/06_Network_IoT.md/-LoRa/ZigBee)
+  * [物联网协议栈](./06-NetworkIot/06_Network_IoT.md/-物联网协议栈)
+    * [MQTT](./06-NetworkIot/06_Network_IoT.md/-MQTT)
+    * [HTTP](./06-NetworkIot/06_Network_IoT.md/-HTTP/HTTPS)
+    * [CoAP](./06-NetworkIot/06_Network_IoT.md/-CoAP/LwM2M)
+  * [云平台接入 & OTA 实现](./06-NetworkIot/06_Network_IoT.md/-云平台接入&OTA实现)
+    * [云平台对接](./06-NetworkIot/06_Network_IoT.md/-云平台对接)
+    * [OTA 升级机制](./06-NetworkIot/06_Network_IoT.md/-OTA升级机制)
