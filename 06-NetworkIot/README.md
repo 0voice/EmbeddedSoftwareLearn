@@ -130,7 +130,7 @@ close(sock);
 
 ---
 
-### ✅ DHCP / DNS / ICMP 说明
+### DHCP / DNS / ICMP 说明
 
 * **DHCP**：动态分配 IP（LwIP 可配置）
 * **DNS**：域名解析，调用 `gethostbyname()` 等
@@ -138,7 +138,7 @@ close(sock);
 
 ---
 
-### ✅ 推荐阅读资料
+### 推荐阅读资料
 
 * [LwIP 官方文档](https://savannah.nongnu.org/projects/lwip/)
 * [FreeRTOS+TCP 文档](https://freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_TCP/index.html)
