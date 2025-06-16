@@ -64,6 +64,90 @@ recv();
 
 ---
 
+## TCP/IP 协议栈基础与嵌入式实现
+
+### TCP/IP 协议栈分层结构（四层模型）
+
+| 层级           | 协议/组件                  | 功能说明                         |
+|----------------|----------------------------|----------------------------------|
+| 应用层         | HTTP, MQTT, CoAP, DNS      | 面向用户的协议                   |
+| 传输层         | TCP, UDP                   | 数据传输可靠性与端口管理         |
+| 网络层         | IP, ICMP, ARP              | 地址与路由                       |
+| 链路层         | Ethernet, Wi-Fi, BLE       | 硬件通信和数据帧传输             |
+
+---
+
+### TCP 与 UDP 区别
+
+| 特性           | TCP                        | UDP                        |
+|----------------|----------------------------|----------------------------|
+| 是否连接       | 是（面向连接）             | 否（无连接）               |
+| 是否可靠       | 是（有重传、确认）         | 否（可能丢包）             |
+| 适用场景       | Web、文件传输、SSH         | 视频流、语音、广播         |
+| 开销           | 较大（握手、窗口等）       | 较小（直接发送）           |
+
+---
+
+### 嵌入式 TCP/IP 协议栈组件
+
+- **LwIP（Lightweight IP）**
+  - 开源轻量级 TCP/IP 协议栈
+  - 支持 TCP/UDP/IP/DNS/DHCP 等
+  - 常用于 STM32、ESP32、RT-Thread 中
+- **uIP（micro IP）**
+  - 更轻量，适合资源极小的 MCU
+- **FreeRTOS+TCP**
+  - 与 FreeRTOS 配套的 TCP/IP 协议栈
+- **Nut/Net、CycloneTCP**：其他常用协议栈
+
+---
+
+### 嵌入式 TCP/IP 通信流程（以 LwIP 为例）
+
+1. **初始化网络接口**：配置 IP、MAC、网关
+2. **创建 socket 套接字**：TCP 或 UDP
+3. **建立连接 / 绑定端口**
+4. **接收/发送数据**：`recv()`, `send()`
+5. **关闭连接**：`close()`
+
+---
+
+### 常用 API 示例（LwIP BSD socket）
+
+```c
+// TCP 客户端示例
+int sock = socket(AF_INET, SOCK_STREAM, 0);
+struct sockaddr_in server;
+server.sin_family = AF_INET;
+server.sin_port = htons(12345);
+server.sin_addr.s_addr = inet_addr("192.168.1.10");
+
+connect(sock, (struct sockaddr*)&server, sizeof(server));
+send(sock, "Hello", strlen("Hello"), 0);
+recv(sock, buffer, sizeof(buffer), 0);
+close(sock);
+```
+
+---
+
+### ✅ DHCP / DNS / ICMP 说明
+
+* **DHCP**：动态分配 IP（LwIP 可配置）
+* **DNS**：域名解析，调用 `gethostbyname()` 等
+* **ICMP**：如 `ping` 实现通信测试
+
+---
+
+### ✅ 推荐阅读资料
+
+* [LwIP 官方文档](https://savannah.nongnu.org/projects/lwip/)
+* [FreeRTOS+TCP 文档](https://freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_TCP/index.html)
+* [TCP/IP Illustrated (Vol 1)](https://book.douban.com/subject/1088054/)
+
+---
+
+
+
 ## 云平台接入 & OTA 实现
 
 ### 云平台对接
