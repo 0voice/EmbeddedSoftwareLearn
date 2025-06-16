@@ -116,4 +116,4 @@ HAL_IWDG_Refresh(&hiwdg);
 
 ---
 
-📁 每类外设将在 `examples/` 中提供完整裸机与 HAL 驱动示例。
+📁 每类外设将在 `examples/` 中提供裸机与 HAL 驱动示例。
