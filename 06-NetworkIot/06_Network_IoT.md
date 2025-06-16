@@ -5,9 +5,9 @@
 
 ---
 
-## 串口通信与 Socket 通信
+## 串口通信与Socket通信
 
-### 串口通信（UART / USART）
+### 串口通信
 - 串口基础：波特率、校验位、停止位、数据位
 - 应用：模块通信、调试信息输出
 - 中断方式与 DMA 模式接收
@@ -17,7 +17,7 @@ USART1->BRR = 0x1A1; // 设置波特率
 USART1->CR1 |= USART_CR1_TE | USART_CR1_RE | USART_CR1_UE; // 使能收发
 ```
 
-### Socket 网络通信
+### Socket网络通信
 - Socket 基础：TCP/UDP 区别、连接建立过程
 - 在 ESP32 等模块中使用 LWIP 实现 TCP 客户端/服务器
 ```c
