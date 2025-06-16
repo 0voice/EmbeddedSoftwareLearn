@@ -85,4 +85,4 @@
     * [CoAP](./06-NetworkIot/06_Network_IoT.md/-CoAP/LwM2M)
   * [云平台接入 & OTA 实现](./06-NetworkIot/06_Network_IoT.md/-云平台接入&OTA实现)
     * [云平台对接](./06-NetworkIot/06_Network_IoT.md/-云平台对接)
-    * [OTA 升级机制](./06-NetworkIot/06_Network_IoT.md/-OTA升级机制)
+    * [OTA 升级机制](./06-NetworkIot/06_Network_IoT.md/-OTA-升级机制)
