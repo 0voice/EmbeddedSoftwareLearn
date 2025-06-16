@@ -128,28 +128,146 @@ strcat(msg, " there"); // msg: "Hi there"
 ```
 
 ### ✅ 结构体 / 共用体 / 枚举 / 位域
-- **结构体**：定义复杂数据结构
-- **共用体**：节省内存，不同字段共享同一块空间
-- **枚举**：定义一组命名整数常量
-- **位域**：控制结构体中每个字段所占位数
-```c
-typedef struct {
-    int id;
-    char name[20];
-} Student;
+#### 结构体
+**定义:**  
 
-union Value {
+结构体是将多个不同类型的数据组合在一起的复合数据类型，用于表示实体的多个属性。  
+**使用场景：**
+- 表示传感器、外设状态、网络包头等复杂数据
+
+- 多变量统一传参，提升代码组织性
+
+语法：
+```c
+
+struct StructName {
+    int id;
+    float value;
+    char name[20];
+};
+```
+示例：
+```c
+
+struct SensorData {
+    int id;
+    float temperature;
+    char location[20];
+};
+
+struct SensorData s1 = {1, 36.5, "room_1"};
+printf("Sensor: %d, Temp: %.1f\n", s1.id, s1.temperature);
+```
+
+#### 共用体
+**定义:**  
+
+共用体中的所有成员共享同一块内存，任何时刻只能使用其中一个成员。  
+**使用场景：**
+- 节省内存：如嵌入式协议帧解析
+
+- 多种数据格式的重解释
+
+语法：
+```c
+
+union UnionName {
+    int i;
+    float f;
+    char c;
+};
+```
+示例：
+```c
+
+union Data {
     int i;
     float f;
 };
 
+union Data d;
+d.i = 10;
+printf("i = %d\n", d.i);
+d.f = 3.14;
+printf("f = %.2f\n", d.f);  // 修改 f 会破坏 i
+```
+注意事项：
+- 占用内存大小为最大成员的大小
+
+- 修改一个成员后，其他成员的值不可预测
+
+#### 枚举（Enumeration）
+**定义：**  
+
+枚举是一种用户自定义的数据类型，用于定义一组命名的整数常量。
+
+**使用场景：**
+- 定义状态机状态
+
+- 表示设备运行模式、错误码
+
+语法：
+```c
+
 enum Color { RED, GREEN, BLUE };
+enum Color color = GREEN;
+```
+示例：
+```c
+
+enum State {
+    STATE_IDLE,
+    STATE_ACTIVE,
+    STATE_ERROR = 100,  // 可手动赋值
+    STATE_SLEEP
+};
+
+enum State current = STATE_ACTIVE;
+printf("State: %d\n", current);  // 输出 1
+```
+特性：  
+- 默认从 0 开始递增
+
+- 可强制设定起始值
+
+#### 位域（Bit Field）
+**定义：**  
+
+位域用于结构体中，定义每个字段占用的比特位数，实现更细粒度的内存控制。
+
+**使用场景：**
+- 配置寄存器映射
+
+- 网络协议比特位字段解析
+
+- 内存空间紧张场景
+
+语法：
+```c
 
 struct Flags {
     unsigned int ready : 1;
     unsigned int error : 1;
+    unsigned int mode  : 2;
 };
 ```
+示例：
+```c
+
+struct Flags f;
+f.ready = 1;
+f.error = 0;
+f.mode = 3;  // 占2位，最大为11（二进制）即3
+
+printf("ready = %d, mode = %d\n", f.ready, f.mode);
+```
+
+注意事项：  
+- 位域不能取地址（&f.ready 不合法）
+
+- 字段数值不能超过位数范围（2^n - 1）
+
+- 与具体编译器实现密切相关（跨平台需小心）
 
 ### ✅ 位操作
 - 嵌入式开发中用于设置寄存器位、控制硬件
