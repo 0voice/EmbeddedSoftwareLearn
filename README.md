@@ -72,11 +72,11 @@
   * 工具链与调试手段
   * 常见开发平台
 * 网络通信与物联网协议
-  * [串口通信与 Socket 通信](./06-NetworkIot/README.md/串口通信与-Socket-通信)
-    * [串口通信](./06-NetworkIot/README.md/串口通信（UART/USART）)
+  * [串口通信与 Socket 通信](./06-NetworkIot/README.md/串口通信与Socket通信)
+    * [串口通信](./06-NetworkIot/README.md/串口通信)
     * [Socket 网络通信](./06-NetworkIot/README.md/Socket网络通信)
-  * [无线通信协议](./06-NetworkIot/06_Network_IoT.md/-无线通信协议)
-    * [Wi-Fi](./06-NetworkIot/06_Network_IoT.md/-Wi-Fi)
+  * [无线通信协议](./06-NetworkIot/README.md/无线通信协议)
+    * [Wi-Fi](./06-NetworkIot/06_Network_IoT.md/Wi-Fi)
     * [BLE（蓝牙低功耗）](./06-NetworkIot/06_Network_IoT.md/-BLE（蓝牙低功耗）)
     * [LoRa / ZigBee](./06-NetworkIot/06_Network_IoT.md/-LoRa/ZigBee)
   * [物联网协议栈](./06-NetworkIot/06_Network_IoT.md/物联网协议栈)
