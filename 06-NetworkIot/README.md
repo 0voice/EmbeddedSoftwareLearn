@@ -69,7 +69,7 @@ recv();
 
 ---
 
-#### ✅ HTTP 状态码
+#### HTTP 状态码
 
 | 分类  | 范围       | 含义       |
 | --- | -------- | -------- |
@@ -96,14 +96,14 @@ recv();
 
 ---
 
-#### ✅ HTTP 长连接与短连接
+#### HTTP 长连接与短连接
 
 * **HTTP/1.0** 默认使用短连接（每次请求后断开）
 * **HTTP/1.1** 默认使用长连接（`Connection: keep-alive`）
 
 ---
 
-#### ✅ HTTP 请求报文格式
+#### HTTP 请求报文格式
 
 ```
 GET /hello.htm HTTP/1.1
@@ -114,7 +114,7 @@ Connection: Keep-Alive
 ... 其他头部字段
 ```
 
-#### ✅ HTTP 响应报文格式
+#### HTTP 响应报文格式
 
 ```
 HTTP/1.1 200 OK
@@ -128,7 +128,7 @@ Date: Sun, 14 Jun 2025 10:00:00 GMT
 
 ---
 
-### 🔹 HTTPS 通信过程
+### HTTPS 通信过程
 
 HTTPS = HTTP + TLS/SSL 加密
 
