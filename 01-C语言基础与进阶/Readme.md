@@ -379,3 +379,240 @@ __asm__ __volatile__ (
 );
 printf("result = %d\n", result);  // 输出 8
 ```
+
+---
+
+
+### 冒泡排序（Bubble Sort）
+
+#### 原理：
+
+相邻元素两两比较，把最大的“冒”到最后。
+
+#### 时间复杂度：
+
+* 最坏/平均：O(n²)
+* 最好：O(n)（加优化判断）
+
+#### 适用场景：
+
+数据量小、逻辑简单、嵌入式环境友好
+
+#### 示例代码：
+
+```c
+void bubble_sort(int arr[], int n) {
+    for (int i = 0; i < n - 1; ++i) {
+        int swapped = 0;
+        for (int j = 0; j < n - i - 1; ++j) {
+            if (arr[j] > arr[j+1]) {
+                int t = arr[j]; arr[j] = arr[j+1]; arr[j+1] = t;
+                swapped = 1;
+            }
+        }
+        if (!swapped) break; // 优化：已排序
+    }
+}
+```
+
+---
+
+### 选择排序（Selection Sort）
+
+#### 原理：
+
+每轮从未排序区间中选择最小值放到前面。
+
+#### 时间复杂度：
+
+* 所有情况：O(n²)
+
+#### 适用场景：
+
+嵌入式设备中内存访问代价高，交换少
+
+#### 示例代码：
+
+```c
+void selection_sort(int arr[], int n) {
+    for (int i = 0; i < n - 1; ++i) {
+        int min = i;
+        for (int j = i + 1; j < n; ++j) {
+            if (arr[j] < arr[min])
+                min = j;
+        }
+        if (min != i) {
+            int t = arr[i]; arr[i] = arr[min]; arr[min] = t;
+        }
+    }
+}
+```
+
+---
+
+### 插入排序（Insertion Sort）
+
+#### 原理：
+
+每次将一个元素插入到已排序部分的合适位置。
+
+#### 时间复杂度：
+
+* 最坏/平均：O(n²)
+* 最好：O(n)
+
+#### 适用场景：
+
+数据量小、数据基本有序时表现好
+
+#### 示例代码：
+
+```c
+void insertion_sort(int arr[], int n) {
+    for (int i = 1; i < n; ++i) {
+        int key = arr[i], j = i - 1;
+        while (j >= 0 && arr[j] > key) {
+            arr[j+1] = arr[j];
+            j--;
+        }
+        arr[j+1] = key;
+    }
+}
+```
+
+---
+
+### 快速排序（Quick Sort）
+
+#### 原理：
+
+分治法。选定基准，左边小于它，右边大于它。
+
+#### 时间复杂度：
+
+* 最坏：O(n²)
+* 平均：O(n log n)
+
+#### 适用场景：
+
+高性能需求、数据量较大（慎用递归栈）
+
+#### 示例代码：
+
+```c
+int partition(int arr[], int low, int high) {
+    int pivot = arr[high], i = low - 1;
+    for (int j = low; j < high; ++j) {
+        if (arr[j] < pivot) {
+            ++i;
+            int t = arr[i]; arr[i] = arr[j]; arr[j] = t;
+        }
+    }
+    int t = arr[i+1]; arr[i+1] = arr[high]; arr[high] = t;
+    return i + 1;
+}
+
+void quick_sort(int arr[], int low, int high) {
+    if (low < high) {
+        int p = partition(arr, low, high);
+        quick_sort(arr, low, p - 1);
+        quick_sort(arr, p + 1, high);
+    }
+}
+```
+
+---
+
+### 归并排序（Merge Sort）
+
+#### 原理：
+
+分治法。将数组分成两半排序后合并。
+
+#### 时间复杂度：
+
+* 所有情况：O(n log n)
+
+#### 适用场景：
+
+追求稳定排序、高精度处理、实时传感器数据等（需额外内存）
+
+#### 示例代码：
+
+```c
+void merge(int arr[], int l, int m, int r) {
+    int n1 = m-l+1, n2 = r-m;
+    int L[n1], R[n2];
+
+    for (int i = 0; i < n1; ++i) L[i] = arr[l+i];
+    for (int j = 0; j < n2; ++j) R[j] = arr[m+1+j];
+
+    int i = 0, j = 0, k = l;
+    while (i < n1 && j < n2)
+        arr[k++] = (L[i] <= R[j]) ? L[i++] : R[j++];
+
+    while (i < n1) arr[k++] = L[i++];
+    while (j < n2) arr[k++] = R[j++];
+}
+
+void merge_sort(int arr[], int l, int r) {
+    if (l < r) {
+        int m = (l + r) / 2;
+        merge_sort(arr, l, m);
+        merge_sort(arr, m+1, r);
+        merge(arr, l, m, r);
+    }
+}
+```
+
+---
+
+### 堆排序（Heap Sort）
+
+#### 原理：
+
+利用堆结构（大根堆），反复取出最大元素构造有序序列。
+
+#### 时间复杂度：
+
+* 所有情况：O(n log n)
+
+#### 适用场景：
+
+嵌入式中对最值处理（最大温度等）、优先级调度
+
+#### 示例代码：
+
+```c
+void heapify(int arr[], int n, int i) {
+    int largest = i, l = 2*i + 1, r = 2*i + 2;
+    if (l < n && arr[l] > arr[largest]) largest = l;
+    if (r < n && arr[r] > arr[largest]) largest = r;
+    if (largest != i) {
+        int t = arr[i]; arr[i] = arr[largest]; arr[largest] = t;
+        heapify(arr, n, largest);
+    }
+}
+
+void heap_sort(int arr[], int n) {
+    for (int i = n/2 - 1; i >= 0; i--) heapify(arr, n, i);
+    for (int i = n-1; i > 0; i--) {
+        int t = arr[0]; arr[0] = arr[i]; arr[i] = t;
+        heapify(arr, i, 0);
+    }
+}
+```
+
+---
+
+## 📌 总结对比表
+
+| 排序算法 | 时间复杂度（平均）  | 空间复杂度    | 稳定性 | 嵌入式适用性   |
+| ---- | ---------- | -------- | --- | -------- |
+| 冒泡排序 | O(n²)      | O(1)     | ✅   | ✅（小数据）   |
+| 选择排序 | O(n²)      | O(1)     | ❌   | ✅        |
+| 插入排序 | O(n²)      | O(1)     | ✅   | ✅（近似有序）  |
+| 快速排序 | O(n log n) | O(log n) | ❌   | ⚠️（递归栈）  |
+| 归并排序 | O(n log n) | O(n)     | ✅   | ⚠️（额外内存） |
+| 堆排序  | O(n log n) | O(1)     | ❌   | ✅        |
+
