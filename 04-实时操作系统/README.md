@@ -1,1 +1,117 @@
 
+# 🟣 第四层：实时操作系统（RTOS）
+
+本模块介绍嵌入式 RTOS（如 FreeRTOS）的基础知识、任务调度机制、资源管理方式以及在实际项目中的使用模式。
+
+---
+
+## 🔹 RTOS 基础概念
+
+### 什么是 RTOS？
+- RTOS（Real-Time Operating System）是用于嵌入式设备中的轻量级操作系统，能提供任务调度、时间管理、资源管理等功能。
+- 特点：确定性、实时性、多任务调度、资源隔离
+
+### 常见 RTOS
+- FreeRTOS（开源、广泛使用）
+- RT-Thread（国产开源，图形化支持强）
+- CMSIS-RTOS（ARM 标准接口）
+- Zephyr（Linux 基金会支持，适合物联网）
+
+---
+
+## 🔹 任务管理
+
+### 创建任务
+```c
+xTaskCreate(TaskFunction_t pxTaskCode,
+            const char * const pcName,
+            configSTACK_DEPTH_TYPE usStackDepth,
+            void *pvParameters,
+            UBaseType_t uxPriority,
+            TaskHandle_t *pxCreatedTask);
+```
+
+### 任务状态
+- Ready：就绪状态
+- Running：运行中
+- Blocked：等待事件/超时
+- Suspended：挂起
+- Deleted：已删除
+
+### 任务优先级与调度算法
+- 抢占式优先调度（Preemptive）
+- 时间片轮转调度（Time Slicing）
+
+---
+
+## 🔹 时间管理
+
+### 延时与定时
+```c
+vTaskDelay(pdMS_TO_TICKS(1000));  // 延时 1 秒
+```
+
+### 软件定时器
+```c
+xTimerCreate();
+xTimerStart();
+```
+
+---
+
+## 🔹 线程间通信
+
+### 队列（Queue）
+- 用于任务间数据传递（FIFO 结构）
+```c
+xQueueCreate();
+xQueueSend();
+xQueueReceive();
+```
+
+### 信号量（Semaphore）
+- 二值信号量（同步）
+- 计数信号量（共享资源数量）
+- 互斥信号量（用于资源保护）
+
+### 消息队列（Message Queue）
+- 用于传递结构化数据或消息结构体
+
+### 事件组（Event Group）
+- 类似标志位，可用于多任务同步
+
+---
+
+## 🔹 资源管理
+
+### 内存管理方式
+- 静态分配（推荐）
+- 动态分配（需要注意碎片与失败处理）
+
+### 临界区保护
+```c
+taskENTER_CRITICAL();
+taskEXIT_CRITICAL();
+```
+
+---
+
+## 🔹 FreeRTOS 配置与移植
+
+### 配置项（FreeRTOSConfig.h）
+- `configUSE_PREEMPTION`：是否使用抢占式调度
+- `configMAX_PRIORITIES`：最大任务优先级数
+- `configMINIMAL_STACK_SIZE`：最小栈空间大小
+
+### 移植步骤
+1. 提供 SysTick 定时器实现
+2. 提供上下文切换代码（汇编）
+3. 编写启动任务入口函数 `vTaskStartScheduler()`
+
+---
+
+## 🔹 实践应用场景
+
+- 多任务协同：传感器数据采集 + 通信模块处理
+- 响应式控制：定时器 + 外部中断 + 优先级控制
+- 任务调度机制优化（任务嵌套/抢占/时间片轮转）
