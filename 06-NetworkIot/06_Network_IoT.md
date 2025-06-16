@@ -83,20 +83,6 @@ recv();
 
 ---
 
-## 📁 文件结构建议
-
-```
-06_Network_IoT/
-├── 01_Serial_Networking/        # 串口与 Socket 基础
-├── 02_BLE_WiFi_LoRa/            # 无线通信协议实现
-├── 03_MQTT_HTTP_CoAP/           # IoT 协议栈示例
-├── 04_Cloud_OTA/                # 云平台对接与 OTA 实现
-├── examples/                    # 示例代码
-└── README.md                    # 模块说明文档
-```
-
----
-
 ## ✅ 推荐学习顺序
 
 1. 学习 UART 通信与基本网络 socket 原理
@@ -113,7 +99,3 @@ recv();
 | MQTT 断线如何重连？ | 设置心跳机制与 reconnect 回调逻辑 |
 | OTA 更新失败怎么办？ | 回退机制 + 双镜像分区设计 |
 | CoAP 和 MQTT 有何区别？ | CoAP 基于 UDP，适合低功耗设备；MQTT 基于 TCP，稳定性好 |
-
----
-
-本章节为嵌入式通信开发的重要组成部分，推荐结合实际模块进行测试练习。
