@@ -55,14 +55,114 @@ recv();
 - 常见平台支持：EMQX、OneNet、阿里云 IoT
 
 ### HTTP / HTTPS
-- 常用于配置、RESTful 通信
-- ESP32、STM32 上使用 HTTP Client 实现 OTA 下载等
+
+#### HTTP 请求方法（Methods）
+
+* **GET**：请求指定资源。常用于获取数据。
+* **POST**：提交数据到服务器，如表单、上传。
+* **PUT**：上传数据，通常是更新资源。
+* **DELETE**：删除指定资源。
+* **HEAD**：与 GET 类似，但不返回响应体。
+* **OPTIONS**：返回服务器支持的请求方法。
+* **TRACE**：诊断请求响应路径，回显请求报文。
+* **CONNECT**：用于建立隧道（如 HTTPS 代理）。
+
+---
+
+#### ✅ HTTP 状态码
+
+| 分类  | 范围       | 含义       |
+| --- | -------- | -------- |
+| 1xx | 100\~199 | 接收中，继续处理 |
+| 2xx | 200\~299 | 请求成功     |
+| 3xx | 300\~399 | 重定向或更多操作 |
+| 4xx | 400\~499 | 客户端错误    |
+| 5xx | 500\~599 | 服务器错误    |
+
+**部分状态码示例：**
+
+* 200 OK
+* 201 Created
+* 204 No Content
+* 301 Moved Permanently
+* 302 Found
+* 304 Not Modified
+* 400 Bad Request
+* 401 Unauthorized
+* 403 Forbidden
+* 404 Not Found
+* 500 Internal Server Error
+* 502 Bad Gateway
+
+---
+
+#### ✅ HTTP 长连接与短连接
+
+* **HTTP/1.0** 默认使用短连接（每次请求后断开）
+* **HTTP/1.1** 默认使用长连接（`Connection: keep-alive`）
+
+---
+
+#### ✅ HTTP 请求报文格式
+
+```
+GET /hello.htm HTTP/1.1
+Host: www.example.com
+User-Agent: Mozilla/5.0
+Accept: */*
+Connection: Keep-Alive
+... 其他头部字段
+```
+
+#### ✅ HTTP 响应报文格式
+
+```
+HTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length: 158
+Server: Apache
+Date: Sun, 14 Jun 2025 10:00:00 GMT
+
+<html>...</html>
+```
+
+---
+
+### 🔹 HTTPS 通信过程
+
+HTTPS = HTTP + TLS/SSL 加密
+
+#### 通信过程：
+
+1. 客户端发起 HTTPS 请求（握手开始）
+2. 服务器返回证书（含公钥）
+3. 客户端验证证书合法性
+4. 客户端生成随机对称密钥（用公钥加密传给服务器）
+5. 双方使用对称密钥开始加密通信
+
+---
+
+#### 对称加密（加解密使用同一密钥）
+
+* **DES**（56 位）
+* **AES**（128/192/256 位）
+
+#### 非对称加密（加密/解密使用公钥/私钥）
+
+* **RSA**：支持加密、签名
+* **DSA**：只支持签名（效率高，但不用于加解密）
+
+#### 哈希算法（不可逆）
+
+* **MD5**（128 位）
+* **SHA-1**（160 位）
+* **SHA-256**（256 位）
 
 ### CoAP / LwM2M
 - 适合低功耗终端的简化协议，UDP 传输，可压缩
 - 用于 NB-IoT、LwIP 等网络栈中
 
----
+--- 
 
 ## TCP/IP 协议栈基础与嵌入式实现
 
