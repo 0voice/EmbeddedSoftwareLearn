@@ -150,6 +150,11 @@ HTTPS = HTTP + TLS/SSL 加密
 * **SHA-1**（160 位）
 * **SHA-256**（256 位）
 
+
+### CoAP / LwM2M
+- 适合低功耗终端的简化协议，UDP 传输，可压缩
+- 用于 NB-IoT、LwIP 等网络栈中
+
 ---
 
 ### 🔹 安全通信实践
@@ -223,10 +228,6 @@ bool ConstantTimeCompare(const uint8_t *a, const uint8_t *b, size_t len) {
     return (result == 0);
 }
 ```
-
-### CoAP / LwM2M
-- 适合低功耗终端的简化协议，UDP 传输，可压缩
-- 用于 NB-IoT、LwIP 等网络栈中
 
 --- 
 
