@@ -107,6 +107,11 @@
   * [根文件系统构建](./05-EmbeddedLinux/README.md#-根文件系统构建)
   * [工具链与调试手段](./05-EmbeddedLinux/README.md#-工具链与调试手段)
   * [常见开发平台](./05-EmbeddedLinux/README.md#-常见开发平台)
+  * [嵌入式系统安全基础](./05-EmbeddedLinux/README.md#-嵌入式系统安全基础)
+  * [安全启动（Secure Boot）](./05-EmbeddedLinux/README.md#-安全启动secure-boot)
+  * [固件加密与防逆向](./05-EmbeddedLinux/README.md#-固件加密与防逆向)
+  * [权限隔离与防护](./05-EmbeddedLinux/README.md#-权限隔离与防护)
+  * [Bootloader 开发建议](./05-EmbeddedLinux/README.md#-bootloader-开发建议)
 * 网络通信与物联网协议
   * [串口通信与 Socket 通信](./06-NetworkIot/README.md#串口通信与Socket通信)
     * [串口通信](./06-NetworkIot/README.md#串口通信)
@@ -119,6 +124,8 @@
     * [MQTT](./06-NetworkIot/README.md#-mqtt)
     * [HTTP/HTTPS](./06-NetworkIot/README.md#http--https)
     * [CoAP/LwM2M](./06-NetworkIot/README.md#coap--lwm2m)
+  * [安全通信实践](/06-NetworkIot/README.md#-安全通信实践)
+  * [安全测试](/06-NetworkIot/README.md#-安全测试)
   * [TCP/IP 协议栈基础与嵌入式实现](./06-NetworkIot/README.md#tcpip-协议栈基础与嵌入式实现)
     * [TCP/IP 协议栈分层结构（四层模型）](./06-NetworkIot/README.md#tcpip-协议栈分层结构四层模型)
     * [TCP 与 UDP 区别](./06-NetworkIot/README.md#tcp-与-udp-区别)
@@ -142,5 +149,5 @@
     * [STM32CubeMonitor](./07-Debug_Optimization#-stm32cubemonitor)
     * [低功耗模式优化](./07-Debug_Optimization#-低功耗模式优化)
   * [调试与优化实战案例](./07-Debug_Optimization#调试与优化实战案例)
-* 安全机制与远程升级
-  * 
+* 
+   
