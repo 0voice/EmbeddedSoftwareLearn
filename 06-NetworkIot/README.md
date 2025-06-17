@@ -255,16 +255,112 @@ close(sock);
 - 认证方式：三元组 / MQTT 密钥 / TLS 证书
 
 ### OTA 升级机制
-- 本地或远程固件更新，防止刷写失败
-- 双分区设计（bootA / bootB）
-- 签名验证与版本控制
+> 支持远程更新嵌入式系统的固件版本
+1. 双分区升级架构
+
+```plaintext
+Flash布局：
++-------------------+ 0x08000000
+| Bootloader        |
++-------------------+ 0x08010000
+| Application Slot A|
++-------------------+ 0x08040000
+| Application Slot B|
++-------------------+ 0x08070000
+| Configuration Area|
++-------------------+
+```
+2. 升级状态机实现
 
 ```c
-// OTA 示例流程
-1. 下载固件至指定 Flash 区域
-2. 校验 MD5 / 签名
-3. 更新启动地址 / 重启
+typedef enum {
+    OTA_IDLE,           // 空闲状态
+    OTA_CHECKING,       // 检查更新
+    OTA_DOWNLOADING,    // 下载中
+    OTA_VERIFYING,      // 校验中
+    OTA_READY,          // 准备重启
+    OTA_UPGRADING,      // 升级中
+    OTA_FAILED          // 升级失败
+} OTA_State_t;
+
+// OTA状态机处理函数
+void OTA_Process(void) {
+    switch (ota_state) {
+        case OTA_IDLE:
+            if (check_update_flag) {
+                ota_state = OTA_CHECKING;
+                vCheckForUpdate();
+            }
+            break;
+        
+        case OTA_DOWNLOADING:
+            if (download_complete) {
+                ota_state = OTA_VERIFYING;
+                vVerifyFirmware();
+            } else if (download_error) {
+                ota_state = OTA_FAILED;
+                vHandleError(DOWNLOAD_ERROR);
+            }
+            break;
+        
+        // 其他状态处理...
+    }
+}
 ```
+3. 失败回滚机制
+
+```c
+// 启动时验证应用完整性
+bool ValidateApplication(uint32_t start_address) {
+    // 检查向量表签名
+    uint32_t *vector_table = (uint32_t *)start_address;
+    if (vector_table[0] == 0xFFFFFFFF) {  // 检查栈顶指针是否有效
+        return false;
+    }
+    
+    // 计算应用哈希并验证
+    uint8_t calculated_hash[32];
+    SHA256((uint8_t *)start_address, APPLICATION_SIZE, calculated_hash);
+    
+    // 从配置区获取预期哈希
+    uint8_t *expected_hash = GetExpectedHash();
+    return (memcmp(calculated_hash, expected_hash, 32) == 0);
+}
+
+// 主程序
+int main(void) {
+    // 初始化硬件
+    HAL_Init();
+    SystemClock_Config();
+    
+    // 检查主应用是否有效
+    if (ValidateApplication(APPLICATION_SLOT_A_ADDRESS)) {
+        // 跳转到主应用
+        JumpToApplication(APPLICATION_SLOT_A_ADDRESS);
+    } else if (ValidateApplication(APPLICATION_SLOT_B_ADDRESS)) {
+        // 主应用无效，尝试从备份应用启动
+        JumpToApplication(APPLICATION_SLOT_B_ADDRESS);
+    } else {
+        // 两个应用都无效，进入恢复模式
+        EnterRecoveryMode();
+    }
+}
+```
+#### ✅ OTA 流程核心步骤
+
+1. 检查版本更新（HTTP/MQTT 下载 manifest）
+2. 下载固件（二进制）
+3. 存储到备份区（Backup Slot）
+4. 校验 CRC/Hash / 签名
+5. 设置 Bootloader 标志位并重启
+6. Bootloader 引导进入新固件
+7. 若失败则回滚（Fail-safe 机制）
+
+#### ✅ 常用升级协议
+
+- HTTP / HTTPS
+- MQTT + Base64 二进制块传输
+- CoAP（轻量级）
 
 ---
 
