@@ -54,6 +54,8 @@ recv();
 - QoS 等级、主题结构、客户端连接
 - 常见平台支持：EMQX、OneNet、阿里云 IoT
 
+---
+
 ### HTTP / HTTPS
 
 #### HTTP 请求方法（Methods）
@@ -66,8 +68,6 @@ recv();
 * **OPTIONS**：返回服务器支持的请求方法。
 * **TRACE**：诊断请求响应路径，回显请求报文。
 * **CONNECT**：用于建立隧道（如 HTTPS 代理）。
-
----
 
 #### HTTP 状态码
 
@@ -94,14 +94,10 @@ recv();
 * 500 Internal Server Error
 * 502 Bad Gateway
 
----
-
 #### HTTP 长连接与短连接
 
 * **HTTP/1.0** 默认使用短连接（每次请求后断开）
 * **HTTP/1.1** 默认使用长连接（`Connection: keep-alive`）
-
----
 
 #### HTTP 请求报文格式
 
@@ -126,8 +122,6 @@ Date: Sun, 14 Jun 2025 10:00:00 GMT
 <html>...</html>
 ```
 
----
-
 ### HTTPS 通信过程
 
 HTTPS = HTTP + TLS/SSL 加密
@@ -139,8 +133,6 @@ HTTPS = HTTP + TLS/SSL 加密
 3. 客户端验证证书合法性
 4. 客户端生成随机对称密钥（用公钥加密传给服务器）
 5. 双方使用对称密钥开始加密通信
-
----
 
 #### 对称加密（加解密使用同一密钥）
 
@@ -158,6 +150,80 @@ HTTPS = HTTP + TLS/SSL 加密
 * **SHA-1**（160 位）
 * **SHA-256**（256 位）
 
+---
+
+### 🔹 安全通信实践
+1. TLS 握手优化  
+- 预共享密钥（PSK）模式：  
+减少证书验证开销，适合资源受限设备。
+```c
+// mbed TLS配置PSK
+mbedtls_ssl_config_set_psk(&ssl_conf, 
+                            psk,          // 预共享密钥
+                            psk_length, 
+                            identity,     // 身份标识
+                            strlen(identity));
+```
+2. 证书管理方案
+- 证书存储：
+  - 根证书存储在安全 Flash 区域。
+  - 设备证书通过安全通道动态更新。
+- 证书验证：
+```c
+// 验证服务器证书链
+int verify_cert(void *data, mbedtls_x509_crt *crt, int depth, uint32_t *flags) {
+    // 检查证书有效期
+    if (mbedtls_x509_crt_check_validity(crt, time(NULL)) != 0) {
+        return MBEDTLS_ERR_X509_CERT_VERIFY_FAILED;
+    }
+    
+    // 检查证书颁发者
+    if (!mbedtls_x509_crt_verify(crt, trusted_certs, NULL, NULL, flags, NULL, NULL)) {
+        return MBEDTLS_ERR_X509_CERT_VERIFY_FAILED;
+    }
+    
+    return 0;
+}
+```
+
+
+---
+
+### 🔹 安全测试
+
+1. 固件逆向分析
+- 工具链：
+  - Ghidra：反编译二进制文件，生成 C 语言伪代码。
+  - IDA Pro：专业逆向工程工具，支持 ARM 架构。
+- 防御措施：
+  - 固件加密：使用 AES-256 加密整个固件。
+  - 反调试机制：检测调试接口是否被连接。
+```c
+// 检测SWD/JTAG调试接口
+bool IsDebuggerAttached(void) {
+    // 读取DBGMCU_IDCODE寄存器
+    uint32_t idcode = DBGMCU->IDCODE;
+    // 检查调试使能位
+    return ((DBGMCU->CR & (DBGMCU_CR_DBG_SLEEP | DBGMCU_CR_DBG_STOP | DBGMCU_CR_DBG_STANDBY)) != 0);
+}
+```
+
+2. 侧信道攻击防护
+- 电源分析攻击：  
+通过测量设备功耗分析加密密钥。
+- 防护措施：  
+常量时间实现：避免条件分支依赖密钥值。
+```c
+// 常量时间比较（防止时序攻击）
+bool ConstantTimeCompare(const uint8_t *a, const uint8_t *b, size_t len) {
+    uint8_t result = 0;
+    for (size_t i = 0; i < len; i++) {
+        result |= a[i] ^ b[i];
+    }
+    return (result == 0);
+}
+```
+
 ### CoAP / LwM2M
 - 适合低功耗终端的简化协议，UDP 传输，可压缩
 - 用于 NB-IoT、LwIP 等网络栈中
@@ -166,7 +232,7 @@ HTTPS = HTTP + TLS/SSL 加密
 
 ## TCP/IP 协议栈基础与嵌入式实现
 
-### TCP/IP 协议栈分层结构（四层模型）
+#### TCP/IP 协议栈分层结构（四层模型）
 
 | 层级           | 协议/组件                  | 功能说明                         |
 |----------------|----------------------------|----------------------------------|
@@ -175,9 +241,8 @@ HTTPS = HTTP + TLS/SSL 加密
 | 网络层         | IP, ICMP, ARP              | 地址与路由                       |
 | 链路层         | Ethernet, Wi-Fi, BLE       | 硬件通信和数据帧传输             |
 
----
 
-### TCP 与 UDP 区别
+#### TCP 与 UDP 区别
 
 | 特性           | TCP                        | UDP                        |
 |----------------|----------------------------|----------------------------|
@@ -186,9 +251,8 @@ HTTPS = HTTP + TLS/SSL 加密
 | 适用场景       | Web、文件传输、SSH         | 视频流、语音、广播         |
 | 开销           | 较大（握手、窗口等）       | 较小（直接发送）           |
 
----
 
-### 嵌入式 TCP/IP 协议栈组件
+#### 嵌入式 TCP/IP 协议栈组件
 
 - **LwIP（Lightweight IP）**
   - 开源轻量级 TCP/IP 协议栈
@@ -200,9 +264,8 @@ HTTPS = HTTP + TLS/SSL 加密
   - 与 FreeRTOS 配套的 TCP/IP 协议栈
 - **Nut/Net、CycloneTCP**：其他常用协议栈
 
----
 
-### 嵌入式 TCP/IP 通信流程（以 LwIP 为例）
+#### 嵌入式 TCP/IP 通信流程（以 LwIP 为例）
 
 1. **初始化网络接口**：配置 IP、MAC、网关
 2. **创建 socket 套接字**：TCP 或 UDP
@@ -210,9 +273,9 @@ HTTPS = HTTP + TLS/SSL 加密
 4. **接收/发送数据**：`recv()`, `send()`
 5. **关闭连接**：`close()`
 
----
 
-### 常用 API 示例（LwIP BSD socket）
+
+#### 常用 API 示例（LwIP BSD socket）
 
 ```c
 // TCP 客户端示例
@@ -228,17 +291,13 @@ recv(sock, buffer, sizeof(buffer), 0);
 close(sock);
 ```
 
----
-
-### DHCP / DNS / ICMP 说明
+#### DHCP / DNS / ICMP 说明
 
 * **DHCP**：动态分配 IP（LwIP 可配置）
 * **DNS**：域名解析，调用 `gethostbyname()` 等
 * **ICMP**：如 `ping` 实现通信测试
 
----
-
-### 推荐阅读资料
+#### 推荐阅读资料
 
 * [LwIP 官方文档](https://savannah.nongnu.org/projects/lwip/)
 * [FreeRTOS+TCP 文档](https://freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_TCP/index.html)
