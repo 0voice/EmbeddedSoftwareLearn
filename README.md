@@ -129,3 +129,18 @@
   * [云平台接入 & OTA 实现](./06-NetworkIot/README.md#云平台接入--ota-实现)
     * [云平台对接](./06-NetworkIot/README.md#云平台对接)
     * [OTA 升级机制](./06-NetworkIot/README.md#OTA-升级机制)
+* 调试与性能优化
+  * [常用调试工具](./07-Debug_Optimization#-常用调试工具)
+    * [JTAG / SWD 接口](/07-Debug_Optimization#-jtag--swd-接口)
+    * [GDB + OpenOCD 调试](./07-Debug_Optimization#-jtag--swd-接口)
+    * [逻辑分析仪 / 示波器](./07-Debug_Optimization#-jtag--swd-接口)
+    * [printf / 串口调试](./07-Debug_Optimization#-jtag--swd-接口)
+    * [断点调试](./07-Debug_Optimization#-jtag--swd-接口)
+  * [性能与功耗优化](./07-Debug_Optimization#-性能与功耗优化)
+    * [FreeRTOS Trace 与分析工具](./07-Debug_Optimization#-freertos-trace-与分析工具)
+    * [SystemView 分析工具](./07-Debug_Optimization#-systemview-分析工具)
+    * [STM32CubeMonitor](./07-Debug_Optimization#-stm32cubemonitor)
+    * [低功耗模式优化](./07-Debug_Optimization#-低功耗模式优化)
+  * [调试与优化实战案例](./07-Debug_Optimization#调试与优化实战案例)
+* 安全机制与远程升级
+  * 
