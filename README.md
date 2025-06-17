@@ -955,11 +955,10 @@ void heap_sort(int arr[], int n) {
 | 归并排序 | O(n log n) | O(n)     | ✅   | ⚠️（额外内存） |
 | 堆排序  | O(n log n) | O(1)     | ❌   | ✅        |
 
-
 ---
+---
+
 # 第二层：嵌入式系统基础知识
-
----
 
 ## 🔹 嵌入式系统概览
 
@@ -1530,7 +1529,7 @@ RAM (rwx) : ORIGIN = 0x20000000, LENGTH = 64K
 ```
 
 ---
-
+---
 
 # 🟠 第三层：驱动开发与外设编程
 
@@ -1774,7 +1773,7 @@ void EXTI0_IRQHandler(void) {
   
 
 ---
-
+---
 
 # 🟣 第四层：实时操作系统（RTOS）
 
@@ -2233,8 +2232,7 @@ UBaseType_t uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
 - 任务调度机制优化（任务嵌套/抢占/时间片轮转）
 
 ---
-
-
+---
 
 # 🟢 第五层：嵌入式 Linux 开发基础
 
@@ -2682,8 +2680,7 @@ uint32_t SecureService_Call(uint32_t service_id, uint32_t param1, uint32_t param
 嵌入式 Linux 是从单片机迈向高性能系统开发的核心门槛，掌握其启动流程、设备树结构与驱动框架是后续学习内核裁剪、系统移植与 IoT 平台开发的基础。
 
 ---
-
-
+---
 
 # 🟣 第六层：网络通信与物联网协议（Network & IoT）
 
@@ -3127,7 +3124,7 @@ int main(void) {
 | CoAP 和 MQTT 有何区别？ | CoAP 基于 UDP，适合低功耗设备；MQTT 基于 TCP，稳定性好 |
 
 ---
-
+---
 
 # ⚡ 第七层：调试与性能优化
 
@@ -3427,7 +3424,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 - 使用 SystemView 分析 FreeRTOS 任务调度行为。
 
 ---
-
+---
 # 📦 第八层：项目实战与工具链
 
 ## ✅ 工程管理
@@ -4278,7 +4275,7 @@ typedef struct {
 | Google Test      | https://github.com/google/googletest       | CMake构建并安装                          |
 
 ---
-
+---
 # 第九层：2025 新趋势
 
 ## ✅ AI on MCU / Edge AI
@@ -4568,4 +4565,3 @@ typedef struct {
    - [ESP32 TinyML Examples](https://github.com/tensorflow/tflite-micro-arduino-examples)  
 
 
-AI与安全是2025年嵌入式领域的两大核心趋势。通过将AI算法部署到边缘设备，可实现实时智能决策，同时降低网络带宽和云端计算成本。而安全性则是保障设备和数据可信的基础，从安全启动到加密通信，再到TPM硬件级保护，构建多层次安全防护体系。在实际项目中，需根据具体需求选择合适的AI模型和安全方案，平衡性能、功耗和安全性。
