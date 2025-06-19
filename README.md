@@ -9,7 +9,7 @@
   <a href="https://github.com/0voice/EmbeddedSoftwareLearn/stargazers">
     <img src="https://img.shields.io/github/stars/0voice/EmbeddedSoftwareLearn?style=social" alt="GitHub stars">
   </a>
-  <a href="https://github.com/0voice/EmbeddedSoftwareLearn/blob/main/LICENSE">
+  <a href="https://github.com/0voice/EmbeddedSoftwareLearn/blob/main/LICENSE.md">
     <img src="https://img.shields.io/github/license/0voice/EmbeddedSoftwareLearn" alt="license">
   </a>
   <a href="https://github.com/0voice/EmbeddedSoftwareLearn">
