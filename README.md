@@ -10,13 +10,14 @@
     <img src="https://img.shields.io/github/stars/0voice/EmbeddedSoftwareLearn?style=social" alt="GitHub stars">
   </a>
   <a href="https://github.com/0voice/EmbeddedSoftwareLearn/blob/main/LICENSE.md">
-    <img src="https://img.shields.io/github/license/0voice/EmbeddedSoftwareLearn" alt="license">
+    <img src="https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-blue.svg" alt="License: CC BY-NC-SA 4.0">
   </a>
   <a href="https://github.com/0voice/EmbeddedSoftwareLearn">
-    <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg">
+    <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome">
   </a>
   <a href="#📬-如何参与贡献"></a>
 </p>
+
 
 ### 概述
 欢迎来到本项目，这里拥有**系统、全面**且贴近实战的2025年嵌入式软件开发学习路线和知识点总结。  
