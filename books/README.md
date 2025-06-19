@@ -24,9 +24,16 @@
 
 《TCPIP详解卷》
 
-#### 因仓库容量限制，更多电子书资源在百度网盘：[点击这里下载]()
-> **6.19 16:03** 资源上传中，上传完毕即刻更新链接！
-![image](https://github.com/user-attachments/assets/c8b911df-33f2-4ae3-a183-4b9e9fdba564)
+#### 因仓库容量限制，更多电子书资源在百度网盘：[点击这里下载](https://pan.baidu.com/s/1ZNIpG7bVxzgVxD_ySkxZ0g?pwd=tex9)提取码: tex9 
+---
+
+或扫描二维码![image](https://github.com/user-attachments/assets/30cf244b-9284-4c10-b14c-1e80f3242c3a)
+
+---
+6.19 补充
+通过网盘分享的文件：电子书汇总.rar
+链接: https://pan.baidu.com/s/1ZNIpG7bVxzgVxD_ySkxZ0g?pwd=tex9 提取码: tex9 
+
 
 > 资源全面无套路，只求star一下本项目，让更多需要的人可以学习！
 
