@@ -1,4 +1,22 @@
-# 📘 2025 嵌入式软件开发全景笔记
+
+<h1 align="center">📘 2025 嵌入式软件开发全景笔记  
+	 EmbeddedSoftwareLearn</h1>
+<p align="center">
+  <strong>嵌入式软件学习路线图 · C语言 / RTOS / Linux驱动 · 从入门到进阶</strong>
+</p>
+
+<p align="center">
+  <a href="https://github.com/0voice/EmbeddedSoftwareLearn/stargazers">
+    <img src="https://img.shields.io/github/stars/0voice/EmbeddedSoftwareLearn?style=social" alt="GitHub stars">
+  </a>
+  <a href="https://github.com/0voice/EmbeddedSoftwareLearn/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/0voice/EmbeddedSoftwareLearn" alt="license">
+  </a>
+  <a href="https://github.com/0voice/EmbeddedSoftwareLearn">
+    <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg">
+  </a>
+  <a href="#📬-如何参与贡献"></a>
+</p>
 
 ### 概述
 欢迎来到本项目，这里拥有**系统、全面**且贴近实战的2025年嵌入式软件开发学习路线和知识点总结。  
@@ -4795,6 +4813,9 @@ typedef struct {
 
 
 ---
-# 免责声明
-**本项目资源汇集于全网，若侵权请先联系邮箱（981340864@qq.com）
-收到信息后将即刻删除！**
+# 🛑 免责声明
+
+本项目内容均来源于互联网公开资料，仅供学习交流使用，版权归原作者所有。
+
+若原作者认为本项目引用内容存在侵权，请通过 issue 或邮件联系我，我们将在第一时间内删除或修正。
+
