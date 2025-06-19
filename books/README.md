@@ -25,6 +25,7 @@
 《TCPIP详解卷》
 
 #### 因仓库容量限制，更多电子书资源在百度网盘：[点击这里下载]()
+> 资源全面无套路，只求star一下本项目，让更多需要的人可以学习！
 
 ![image](https://github.com/user-attachments/assets/8fa5af26-2bab-4bbd-9c90-e4b56bb59452)
 
