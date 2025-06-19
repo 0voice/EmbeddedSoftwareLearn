@@ -35,8 +35,8 @@
 链接: https://pan.baidu.com/s/1ZNIpG7bVxzgVxD_ySkxZ0g?pwd=tex9 提取码: tex9 
 
 
-> 资源全面无套路，只求star一下本项目，让更多需要的人可以学习！
-> 如果资源失效请第一时间 issue 或通过邮箱联系我
+> 资源全面无套路，只求star一下本项目，让更多需要的人可以学习！  
+> 如果资源失效请第一时间 issue 或通过邮箱联系我！
 
 ![image](https://github.com/user-attachments/assets/8fa5af26-2bab-4bbd-9c90-e4b56bb59452)
 
