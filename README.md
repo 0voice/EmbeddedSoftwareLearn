@@ -4772,3 +4772,7 @@ typedef struct {
    - [ESP32 TinyML Examples](https://github.com/tensorflow/tflite-micro-arduino-examples)  
 
 
+---
+# 免责声明
+**本项目资源汇集于全网，若侵权请先联系邮箱（981340864@qq.com）
+收到信息后将即刻删除！**
